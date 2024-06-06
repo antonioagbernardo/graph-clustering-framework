@@ -10,9 +10,21 @@ setup(
         'scipy',
         'matplotlib',
         'networkx',
-        'scikit-learn'
+        'scikit-learn',
+        'python-igraph',
+        'cairocffi',  # substitui python-cairo para compatibilidade com pip
+        'svgutils',
+        'autorank',
+        'pandas',
+        'mpl_toolkits.mplot3d',  # mpl_toolkits é uma parte do matplotlib
+        'IPython',
     ],
-    
+    extras_require={
+        'dev': [
+            'pytest',
+            'sphinx',
+        ],
+    },
     entry_points={
         'console_scripts': [
             'example_script=src.example:main',
