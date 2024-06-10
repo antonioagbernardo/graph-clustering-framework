@@ -1,1 +1,11 @@
-
+numpy
+scipy
+matplotlib
+networkx
+scikit-learn
+python-igraph
+cairocffi
+svgutils
+autorank
+pandas
+IPython
