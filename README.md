@@ -1,6 +1,6 @@
 # graph-clustering-framework
 
-##References
+## References
 kNN
 
   Eppstein, D., Paterson, M.S. & Yao, F.F. On Nearest-Neighbor Graphs. Discrete Comput Geom 17, 263–282 (1997).
