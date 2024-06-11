@@ -37,7 +37,7 @@ def sknn(X, kmax, mode='distance', metric='euclidean'):
         k1 += 1
         degree = np.array(g1.degree())
         indices = np.where(degree < kmax)[0]
-        if len(indices) == 0 or k > kmax:
+        if len(indices) == 0 or k1 > kmax:
             break
 
     # Constrained k-NN by kmax
