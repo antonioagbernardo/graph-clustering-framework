@@ -1,5 +1,20 @@
 # Graph-Clustering-Framework
 
+## Input format
+We use `X,y = sklearn.datasets.make_blobs(n_samples, n_features, centers, cluster_std, random_state)`to create the data base.
+
+We also create a list os colors `colors = ['red', 'green', 'orange', 'yellow', 'blue'......]` the number of colors == centers
+
+You can plot by using:
+
+~~~python
+#3D
+plot_grafico3(X, y, colors)
+
+#2D
+plot_grafico2(X, y, colors)
+~~~~
+
 ## References
 >KNN
 
