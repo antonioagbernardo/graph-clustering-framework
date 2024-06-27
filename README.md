@@ -1,14 +1,22 @@
 # Graph-Clustering-Framework
 
-##Proposal
+## Proposal
 
-The main idea is to define a dataset;
+The main idea is to define a dataset:
 
-Transform the original data into a graph;
+![](./pics/fig_conjunto_de_dados_a.png)
 
-Apply a community detection algorithm;
+Transform the original data into a graph:
 
-And then project the communities as groups onto the original data.
+![](./pics/fig_conjunto_de_dados_b.png)
+
+Apply a community detection algorithm:
+
+![](./pics/fig_conjunto_de_dados_c.png)
+
+And then project the communities as groups onto the original data:
+
+![](./pics/fig_conjunto_de_dados_d.png)
 
 
 ## Input format
