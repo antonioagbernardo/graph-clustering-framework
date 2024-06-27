@@ -8,11 +8,11 @@ The main idea is to define a dataset:
 
 Transform the original data into a graph:
 
-![](./pics/fig_conjunto_de_dados_b.png)
+![](./pics/fig_conjunto_de_dados_b.jpeg)
 
 Apply a community detection algorithm:
 
-![](./pics/fig_conjunto_de_dados_c.png)
+![](./pics/fig_conjunto_de_dados_c.jpeg)
 
 And then project the communities as groups onto the original data:
 
