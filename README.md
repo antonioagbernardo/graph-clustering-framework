@@ -1,5 +1,16 @@
 # Graph-Clustering-Framework
 
+##Proposal
+
+The main idea is to define a dataset;
+
+Transform the original data into a graph;
+
+Apply a community detection algorithm;
+
+And then project the communities as groups onto the original data.
+
+
 ## Input format
 We use `X,y = sklearn.datasets.make_blobs(n_samples, n_features, centers, cluster_std, random_state)`to create the data base.
 
