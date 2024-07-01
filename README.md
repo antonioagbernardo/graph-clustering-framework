@@ -24,17 +24,8 @@ We use `X,y = sklearn.datasets.make_blobs(n_samples, n_features, centers, cluste
 
 We also create a list os colors `colors = ['red', 'green', 'orange', 'yellow', 'blue'......]` the number of colors == centers
 
-You can plot by using:
+You can plot by doing:
 
-~~~python
-#3D
-plot_grafico3(X, y, colors)
-
-#2D
-plot_grafico2(X, y, colors)
-~~~~
-
-# Example:
 ~~~python
 X, y = dt.make_blobs(n_samples = 1000, n_features = 3, centers = 5, cluster_std = 1.1, random_state = 33)
 
