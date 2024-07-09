@@ -204,6 +204,8 @@ It creates a Pandas DataFrame with the NMI scores and prints it.
 
 In summary, this code evaluates the performance of the Fastgreedy community detection algorithm on a synthetic dataset with varying levels of noise, using the K-NN graph construction method. It plots the NMI scores against the noise levels and provides summary statistics.
 
+![](./pics/Knn_fastgreedy.png)
+
 
 
 ~~~python
@@ -221,6 +223,8 @@ plt.show()
 ~~~
 
 This code is creating a simple line plot using matplotlib to visualize the relationship between the execution time (time_) and the noise level (noise).
+
+![](./pics/time_noise.png)
 
 ## References
 >KNN
