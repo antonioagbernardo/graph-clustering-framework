@@ -40,6 +40,43 @@ plot_grafico2(X, y, colors)
 
 ![](./pics/2d_artificial_data.png)
 
+## Example
+
+After defining a database (X, y), we can use some of the Graph Construction Algorithm, for example the MKNN (X,k).
+
+~~~python
+def components(W):
+  g = Graph.Weighted_Adjacency(W.todense(), mode='undirected', attr='weight', loops=False)
+  return len(g.connected_components())
+
+def MKNN(X,k):
+  W = kneighbors_graph(X, k, mode='distance', metric='euclidean', include_self=False)
+  W = W.minimum(W.T)
+  if components(W) > 1:
+     W = W + mst_graph(X,'euclidean')
+  g2 = Graph.Weighted_Adjacency(W.todense(), mode='undirected', attr='weight', loops=False)
+  return g2
+~~~
+
+Then:
+
+~~~python
+g2 = MKNN(X,10)
+
+# Plot
+
+# 2D Graph
+plot_2d_graph(g2, y=y, X=X, ind=range(0, g2.vcount()), colors=colors)
+
+
+#3D Graph
+plot_grafico3(X, y, colors, g2)
+~~~
+
+![](./pics/3d_mknn_graph.png)
+
+![](./pics/2d_mknn_graph.png)
+
 ## References
 >KNN
 
