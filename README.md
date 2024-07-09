@@ -73,9 +73,9 @@ plot_2d_graph(g2, y=y, X=X, ind=range(0, g2.vcount()), colors=colors)
 plot_grafico3(X, y, colors, g2)
 ~~~
 
-![](./pics/3d_mknn_graph.png)
+![](./pics/2d_mknn_graph.jpeg)
 
-![](./pics/2d_mknn_graph.png)
+![](./pics/3d_mknn_graph.png)
 
 ## References
 >KNN
