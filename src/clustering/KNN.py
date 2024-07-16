@@ -1,17 +1,17 @@
-def KNN(X,k):
+def KNN(X,k,metric):
 
-  scaler = StandardScaler()
-  X = scaler.fit_transform(X)
+  if metric == 'euclidean':
+    W = kneighbors_graph(X, 4, mode='distance', metric='euclidean', include_self=False)
+    W = 0.5 * (W + W.T)
+    g = Graph.Weighted_Adjacency(W.todense(), mode='undirected', attr='weight', loops=False)
 
-  W_knn = kneighbors_graph(X, n_neighbors=k, mode='connectivity', metric='euclidean', include_self=False)
+    return g
 
-  W_knn_mutual = kneighbors_graph(X, n_neighbors=k, mode='connectivity', metric='euclidean', include_self=False)
+  if metric == 'cosine':
 
-  W_mutual_knn = W_knn.multiply(W_knn_mutual)
+    W = kneighbors_graph(X, 4, mode='distance', metric='cosine', include_self=False)
+    W = 0.5 * (W + W.T)
+    g = Graph.Weighted_Adjacency(W.todense(), mode='undirected', attr='weight', loops=False)
 
-  W_mutual_knn = 0.5 * (W_mutual_knn + W_mutual_knn.T)
-
-  g = Graph.Weighted_Adjacency(W_mutual_knn.todense(), mode='undirected', attr='weight', loops=False)
-
-  return g
+    return g
   
