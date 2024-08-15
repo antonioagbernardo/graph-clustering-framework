@@ -1,5 +1,7 @@
 #B-matching
 
+def b_matching(X, k, b, metric='euclidean'):
+
   '''
   X: uma matriz numpy 2D de formato (n_amostras, n_características) representando os pontos de dados.
 
@@ -13,13 +15,9 @@ Em seguida, cria uma matriz esparsa para armazenar o grafo de B-Matching.
 
 A função então itera sobre cada ponto de dados e seleciona seus b vizinhos mais próximos que também estão entre seus k vizinhos mais próximos. Em seguida, cria arestas entre o ponto de dados e seus b vizinhos mais próximos selecionados no grafo de B-Matching.
 
-Por fim, a função retorna o grafo de B-Matching como uma matriz esparsa.
-
 b_matching assume que b é menor ou igual a k.
 
   '''
-
-def b_matching(X, k, b, metric='euclidean'):
     # Compute k-nearest neighbors for each node
   knn_graph = kneighbors_graph(X, n_neighbors=k, metric=metric)
 
@@ -41,4 +39,4 @@ def b_matching(X, k, b, metric='euclidean'):
 
   g = Graph.Weighted_Adjacency(b_matching_graph.todense(), mode='undirected', attr='weight', loops=False)
 
-  return g
+  return g, b_matching_graph
