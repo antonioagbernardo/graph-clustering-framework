@@ -1,3 +1,5 @@
+from MST import mst_graph
+
 def mst_graph(X, metric):
 
     if metric == 'cosine':
@@ -29,6 +31,8 @@ def cknn_graph(X, delta, k):
 
     adj = 0.5 * (adj + adj.T)
 
-    g = Graph.Weighted_Adjacency(adj, mode='undirected', attr='weight', loops=False)
+    W = csr_matrix(adj)
 
-    return g 
+    g = Graph.Weighted_Adjacency(W.todense(), mode='undirected', attr='weight', loops=False)
+
+    return g, W
