@@ -34,4 +34,4 @@ def rmst_graph(X, gamma, k):
 
     g = Graph.Weighted_Adjacency(W.todense(), mode='undirected', attr='weight', loops=False)
 
-    return g
+    return g, W
