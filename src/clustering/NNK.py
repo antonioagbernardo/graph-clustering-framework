@@ -97,9 +97,9 @@ def nnk_graph(G, mask, knn_param, reg=1e-6):
     # 1]] = 0
     adjacency = adjacency.multiply(error < error.T)
     adjacency = adjacency.maximum(adjacency.T)
-    
+
     adjacency = adjacency + mst_graph(X, 'Euclidean')
 
     g = Graph.Weighted_Adjacency(adjacency.todense(), mode='undirected', attr='weight', loops=False)
 
-    return g
+    return g, adjacency
