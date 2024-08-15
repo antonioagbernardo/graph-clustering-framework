@@ -28,4 +28,4 @@ def MST(X, metric):
 
     g2 = Graph.Weighted_Adjacency(W1.todense(), mode='undirected', attr='weight', loops=False)
 
-    return g2
+    return g2, W1
