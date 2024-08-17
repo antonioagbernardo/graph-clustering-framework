@@ -5,7 +5,8 @@
 from sklearn.cluster import KMeans
 from igraph import Graph
 
-from clustering import *
+from clustering.KNN import *
+from clustering.MKNN import *
 
 #Base artificial
 X, y = dt.make_blobs(n_samples = 1000, n_features = 3, centers = 5, cluster_std = 1.1, random_state = 33)
