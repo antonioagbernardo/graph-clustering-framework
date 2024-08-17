@@ -81,7 +81,7 @@ plot_grafico3(X, y, colors, g2)
 
 ## NLP
 
-## Tests
+## Kmens x Fastegreedy
 
 I can also evaluate the performance of a clustering algorithm, in the example below I used the Fastgreedy community detection algorithm and the K-NN graph construction method. I used a synthetic dataset with varying levels of noise. 
 
