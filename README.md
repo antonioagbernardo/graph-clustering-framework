@@ -77,6 +77,9 @@ plot_grafico3(X, y, colors, g2)
 
 ![](./pics/3d_mknn_graph.png)
 
+## Iris Dataset
+
+## NLP
 
 ## Tests
 
