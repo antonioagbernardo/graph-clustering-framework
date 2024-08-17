@@ -173,7 +173,6 @@ plot_grafico3(X, y, colors, g)
 
 #### Sepal Length - Sepal Width
 
-# @title
 X = np.array(Iris_dataset[['sepal_length', 'sepal_width']])
 
 y = Iris_dataset['species']
@@ -194,7 +193,6 @@ plot_grafico2(X,y,colors,g)
 
 #### Petal Length -   Petal Width
 
-# @title
 X = np.array(Iris_dataset[['petal_length', 'petal_width']])
 
 y = Iris_dataset['species']
