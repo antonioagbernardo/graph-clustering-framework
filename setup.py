@@ -6,18 +6,19 @@ setup(
     packages=find_packages(where="src"),
     package_dir={"": "src"},
     install_requires=[
-        'numpy',
-        'scipy',
+        'autorank',
+        'cairocffi',
+        'IPython',
         'matplotlib',
         'networkx',
-        'scikit-learn',
-        'python-igraph',
-        'cairocffi',  # substitui python-cairo para compatibilidade com pip
-        'svgutils',
-        'autorank',
+        'numpy',
         'pandas',
-        'mpl_toolkits.mplot3d',  # mpl_toolkits é uma parte do matplotlib
-        'IPython',
+        'plotly==5.23.0',
+        'python-igraph',
+        'scikit-learn',
+        'scipy',
+        'seaborn',
+        'svgutils',
     ],
     extras_require={
         'dev': [
@@ -42,4 +43,3 @@ setup(
     ],
     python_requires='>=3.6',
 )
-
