@@ -113,6 +113,70 @@ plot_grafico3(X, y, colors, g)
 ![](./pics/iris1.jpeg)
 ![](./pics/iris2.png)
 ![](./pics/iris3.png)
+
+### Clustering example 
+~~~python
+X = np.array(Iris_dataset[['sepal_length', 'sepal_width', 'petal_width']])
+
+#Aplicando Kmeans
+kmeans = KMeans(n_clusters=3, random_state=42, n_init=10)
+kmeans.fit(X)
+
+labels_kmeans = kmeans.labels_
+
+#Aplicando Fastgreedy
+g, W = KNN(X, k=5, metric='euclidean')
+
+# Convert W to a dense matrix
+W_dense = W.toarray()
+
+# Get the edge list from the graph
+edges = g.get_edgelist()
+
+# Create a weights vector with the same length as the number of edges
+edge_weights = np.zeros(len(edges))
+
+# Assign weights to each edge using the dense matrix
+for i, edge in enumerate(edges):
+    edge_weights[i] = W_dense[edge[0], edge[1]]
+
+# Now you can pass edge_weights to the community_fastgreedy method
+fastgreedy = Graph.community_fastgreedy(g, weights=edge_weights)
+labels_fastgreedy = fastgreedy.as_clustering().membership
+
+
+#Comparando
+plt.scatter(X[:, 0], X[:, 1], c=labels_kmeans)
+plt.title('Kmeans')
+plt.show()
+
+plt.scatter(X[:, 0], X[:, 1], c=labels_fastgreedy)
+plt.title('Fastgreedy + KNN')
+plt.show()
+
+
+#NMI (Normalized Mutual Information)
+labels_kmeans = kmeans.labels_
+labels_fastgreedy = fastgreedy.as_clustering().membership
+
+nmi_kmeans = normalized_mutual_info_score(y, labels_kmeans)
+nmi_fastgreedy = normalized_mutual_info_score(y, labels_fastgreedy)
+
+print()
+print("NMI K-Means:", nmi_kmeans)
+print("NMI Fastgreedy + KNN:", nmi_fastgreedy)
+print()
+
+plt.bar(["K-Means", "Fastgreedy + KNN"], [nmi_kmeans, nmi_fastgreedy], color=["blue", "green"])
+plt.xlabel("Algoritmo")
+plt.ylabel("NMI")
+plt.title("Pontuação de NMI")
+plt.show()
+~~~
+![](./pics/iriskmeans.png)
+![](./pics/irisfastgreedy.png)
+![](./pics/irisnmi.png)
+
 ## NLP
 
 ## Kmens x Fastegreedy
