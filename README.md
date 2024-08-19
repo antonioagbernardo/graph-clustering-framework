@@ -78,7 +78,41 @@ plot_grafico3(X, y, colors, g2)
 ![](./pics/3d_mknn_graph.png)
 
 ## Iris Dataset
+I also used Iris Dataset to make some graphs and clustering.
+### Upload and Visualization
 
+~~~python
+Iris_dataset = pd.read_csv('Iris_dataset.csv')
+px.scatter_3d(Iris_dataset, "sepal_length", "sepal_width", "petal_length",
+             color="species", color_discrete_map = {"Joly": "blue", "Bergeron": "violet", "Coderre":"pink"})
+~~~
+
+### Graph constructions
+~~~python
+X = np.array(Iris_dataset[['sepal_length', 'sepal_width','petal_length', 'petal_width']])
+
+y = Iris_dataset['species']
+le = LabelEncoder()
+y = le.fit_transform(y)
+
+g, W = MST(X,'cosine')
+
+print('Score Wrong Edges:', score_we(W, y))
+
+
+# Plot
+
+# Grafo 2D
+plot_2d_graph(g, y=y, X=X, ind=range(0, g.vcount()), colors=colors)
+
+plot_grafico2(X,y,colors,g)
+
+#Grafo 3D
+plot_grafico3(X, y, colors, g)
+~~~
+![](./pics/iris1.jpeg)
+![](./pics/iris2.png)
+![](./pics/iris3.png)
 ## NLP
 
 ## Kmens x Fastegreedy
