@@ -390,74 +390,65 @@ I can also evaluate the performance of a clustering algorithm, in the example be
 
 ~~~python
 
-#fastgreedy - KNN
-nmi_fastgreedy_knn = []
-std_fastgreedy_knn = []
-all_fastgreedy_knn = []
-time_ = []
+# Variando ruido na base de dados
+noise = list(range(2, 11))
+nmi_fastgreedy = []
+nmi_kmeans =[]
+execution_times_kmeans = []
+execution_times_fastg = []
 
+for nois in noise:
+    start_time_kmeans = time.time()
 
-noise = np.arange(0.1, 25, 1)
-clusters = 5
+    # Base artificial
+    X, y = dt.make_blobs(n_samples=1000, n_features=3, centers=5, cluster_std=nois, random_state=33)
 
-for i in noise:
-  print("Ruido {0}".format(i))
+    # Aplicando Kmeans
+    kmeans = KMeans(n_clusters=3, random_state=42, n_init=10)
+    kmeans.fit(X)
 
-  time_start = time.time()
+    labels_kmeans = kmeans.labels_
 
-  aux_fastgreedy_knn = []
-  aux_time = []
+    nmi_kmeans.append(normalized_mutual_info_score(y, labels_kmeans))
 
-  for j in range(1, 10, 1):
-    X, y = dt.make_blobs(n_samples=500, n_features=2, centers=clusters, cluster_std=i)
+    end_time_kmeans = time.time()
+    execution_times_kmeans.append(end_time_kmeans - start_time_kmeans)
 
-    #knn
-    _max_fastgreedy = 0.0
-    _max_infomap = 0.0
-    _max_leading = 0.0
-    membership = []
-    for k in range(1, 40, 1):
-      g = KNN(X,k)
-      #fastgreedy
-      dendogram_fastgreedy = g.community_fastgreedy(weights="weight")
-      try:
-        labels_fastgreedy = dendogram_fastgreedy.as_clustering(n=clusters)
-      except:
-        continue
-      score_fastgreedy = normalized_mutual_info_score(y, labels_fastgreedy.membership)
-      if score_fastgreedy > _max_fastgreedy:
-        _max_fastgreedy = score_fastgreedy
+    start_time_fastg = time.time()
 
+    g, W = KNN(X, k=10, metric='euclidean')
+    # Convert W to a dense matrix
+    W_dense = W.toarray()
+    # Get the edge list from the graph
+    edges = g.get_edgelist()
+    # Create a weights vector with the same length as the number of edges
+    edge_weights = np.zeros(len(edges))
+    # Assign weights to each edge using the dense matrix
+    for i, edge in enumerate(edges):
+        edge_weights[i] = W_dense[edge[0], edge[1]]
+    # Now you can pass edge_weights to the community_fastgreedy method
+    fastgreedy = Graph.community_fastgreedy(g, weights=edge_weights)
+    labels_fastgreedy = fastgreedy.as_clustering().membership
+    nmi_fastgreedy.append(normalized_mutual_info_score(y, labels_fastgreedy))
 
-    aux_fastgreedy_knn.append(_max_fastgreedy)
+    end_time_fastg = time.time()
+    execution_times_fastg.append(end_time_fastg - start_time_fastg)
 
-  time_finish = time.time()
-  time_exec = time_finish - time_start
-  aux_time.append(time_exec)
+    # Visualizando Fastgreedy para cada Ruido
+    plt.scatter(X[:, 0], X[:, 1], c=labels_fastgreedy)
+    plt.title(f'Fastgreedy + KNN (noise={nois})')
+    plt.show()
 
-  nmi_fastgreedy_knn.append(np.mean(aux_fastgreedy_knn))
-  std_fastgreedy_knn.append(np.std(aux_fastgreedy_knn))
-  all_fastgreedy_knn.extend(nmi_fastgreedy_knn)
-  time_.extend(aux_time)
-
-plt.figure(figsize=(9,6))
-err_param = dict(linewidth=1.0, markersize=5, alpha=0.8, mfc='white', markeredgewidth=1.0, capsize=1, capthick=1.8, elinewidth=0.8)
-plt.errorbar(noise, nmi_fastgreedy_knn, std_fastgreedy_knn, label='k-NN + Fastgreedy', color='b', marker='o', **err_param)
-
-plt.xlabel('Noise', fontsize = 15)
-plt.ylabel('NMI', fontsize = 15)
-plt.legend(loc='center left', bbox_to_anchor=(1, 0.5))
-plt.show(True)
-
-print("k-NN + Fastgreedy:", "Mean:", np.mean(all_fastgreedy_knn), "STD:", np.std(all_fastgreedy_knn))
-
-data = pd.DataFrame()
-data['k-NN + Fastgreedy'] = nmi_fastgreedy_knn
-
-print(data)
-
+# Plotando os resultados
+plt.plot(noise, nmi_fastgreedy, label='Fastgreedy + KNN')
+plt.plot(noise, nmi_kmeans, label='K-Means')
+plt.xlabel('Ruído')
+plt.ylabel('NMI')
+plt.title('Desempenho do Fastgreedy+KNN e K-Means em função do ruído')
+plt.legend()
+plt.show()
 ~~~
-
+![](./pics/ruidokmeansfastgreedy.png)
 > Initialization
 
 The code initializes several empty lists to store results: nmi_fastgreedy_knn, std_fastgreedy_knn, all_fastgreedy_knn, and time_.
@@ -528,7 +519,7 @@ ax.set_ylabel('Ruido')
 plt.show()
 ~~~
 
-This code is creating a simple line plot using matplotlib to visualize the relationship between the execution time (time_) and the noise level (noise).
+This code is creating a simple line plot using matplotlib to visualize the relationship between the execution time and the noise level.
 
 ![](./pics/time_noise.png)
 
