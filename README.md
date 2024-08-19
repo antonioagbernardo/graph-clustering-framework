@@ -503,6 +503,9 @@ plt.show()
 
 ~~~
 ![](./pics/kmeansfastgreedykvar3.png)
+.
+.
+.
 ![](./pics/kmeansfastgreedykvar10.png)
 ![](./pics/kmeansfastgreedykvar.png)
 ## References
