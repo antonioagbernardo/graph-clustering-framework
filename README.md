@@ -383,7 +383,7 @@ g, W= MST(X,'euclidian')
 plot_2d_graph(g, X=X)
 ~~~
 ![](./pics/nlp1.png)
-![](./pics/nlp2.png)
+![](./pics/nlp2.jpeg)
 ## Kmens x Fastegreedy
 
 I can also evaluate the performance of a clustering algorithm, in the example below I used the Fastgreedy community detection algorithm and the K-NN graph construction method. I used a synthetic dataset with varying levels of noise. 
