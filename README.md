@@ -449,80 +449,62 @@ plt.legend()
 plt.show()
 ~~~
 ![](./pics/ruidokmeansfastgreedy.png)
-> Initialization
 
-The code initializes several empty lists to store results: nmi_fastgreedy_knn, std_fastgreedy_knn, all_fastgreedy_knn, and time_.
-It defines a range of noise levels (noise) from 0.1 to 25, with a step size of 1.
-It sets the number of clusters (clusters) to 5.
-
-> Main Loop
-
-The code loops through each noise level (i) in the noise range.
-
-For each noise level, it:
-
-  1. Prints the current noise level.
-
-  2. Starts a timer using time.time().
-
-Initializes two empty lists: aux_fastgreedy_knn to store the maximum NMI (Normalized Mutual Information) scores for each iteration, and aux_time to store the execution time for each iteration.
-
-Loops through 9 iterations (j ranges from 1 to 10, with a step size of 1).
-
-For each iteration, it:
-
-  1. Generates a synthetic dataset using make_blobs from scikit-learn, with 500 samples, 2 features, 5 clusters, and a standard deviation of i (the current noise level).
-  
-  2. Creates a K-NN graph using the KNN function (not a standard scikit-learn function, so it's likely a custom implementation).
-  
-  3. Applies the Fastgreedy community detection algorithm to the graph, and extracts the clustering labels.
-  
-  4. Computes the NMI score between the true labels (y) and the predicted labels using normalized_mutual_info_score from scikit-learn.
-  
-  5. Updates the maximum NMI score (_max_fastgreedy) if the current score is higher.
-  
-  6. Appends the maximum NMI score to aux_fastgreedy_knn.
-  
-  7. Stops the timer and appends the execution time to aux_time.
-  
-  8. Computes the mean and standard deviation of the NMI scores in aux_fastgreedy_knn, and appends them to nmi_fastgreedy_knn and std_fastgreedy_knn, respectively.
-  
-  9. Extends all_fastgreedy_knn with the mean NMI scores, and time_ with the execution times.
-
-> Plotting
-
-The code creates a figure with a single plot using matplotlib.
-It plots the mean NMI scores (nmi_fastgreedy_knn) against the noise levels (noise), with error bars representing the standard deviation (std_fastgreedy_knn).
-It sets labels, title, and legend for the plot.
-Final Output
-
-The code prints the mean and standard deviation of the NMI scores across all noise levels.
-It creates a Pandas DataFrame with the NMI scores and prints it.
-
-In summary, this code evaluates the performance of the Fastgreedy community detection algorithm on a synthetic dataset with varying levels of noise, using the K-NN graph construction method. It plots the NMI scores against the noise levels and provides summary statistics.
-
-![](./pics/Knn_fastgreedy.png)
-
-
-
+We can also, fix the database and variate K values
 ~~~python
-y = noise
-x = time_
+# Base artificial
+X, y = dt.make_blobs(n_samples=1000, n_features=3, centers=5, cluster_std=1.1, random_state=33)
 
-fig, ax = plt.subplots()
+# Aplicando Kmeans
+kmeans = KMeans(n_clusters=3, random_state=42, n_init=10)
+kmeans.fit(X)
 
-ax.plot(x,y)
+labels_kmeans = kmeans.labels_
 
-ax.set_xlabel('Time')
-ax.set_ylabel('Ruido')
+# Variando K no Fastgreedy
+ks = [2, 3, 4, 5, 6, 7, 8, 9, 10]
+nmi_fastgreedy = []
+execution_times = []
 
+for k in ks:
+    start_time = time.time()
+
+    g, W = KNN(X, k=k, metric='euclidean')
+    # Convert W to a dense matrix
+    W_dense = W.toarray()
+    # Get the edge list from the graph
+    edges = g.get_edgelist()
+    # Create a weights vector with the same length as the number of edges
+    edge_weights = np.zeros(len(edges))
+    # Assign weights to each edge using the dense matrix
+    for i, edge in enumerate(edges):
+        edge_weights[i] = W_dense[edge[0], edge[1]]
+    # Now you can pass edge_weights to the community_fastgreedy method
+    fastgreedy = Graph.community_fastgreedy(g, weights=edge_weights)
+    labels_fastgreedy = fastgreedy.as_clustering().membership
+    nmi_fastgreedy.append(normalized_mutual_info_score(y, labels_fastgreedy))
+
+    end_time = time.time()
+    execution_times.append(end_time - start_time)
+
+    # Visualizando Fastgreedy para cada K
+    plt.scatter(X[:, 0], X[:, 1], c=labels_fastgreedy)
+    plt.title(f'Fastgreedy + KNN (K={k})')
+    plt.show()
+
+# Plotando os resultados
+plt.plot(ks, nmi_fastgreedy, label='Fastgreedy + KNN')
+plt.axhline(normalized_mutual_info_score(y, labels_kmeans), color='r', linestyle='--', label='K-Means')
+plt.xlabel('K')
+plt.ylabel('NMI')
+plt.title('Desempenho do Fastgreedy + KNN em função de K')
+plt.legend()
 plt.show()
+
 ~~~
-
-This code is creating a simple line plot using matplotlib to visualize the relationship between the execution time and the noise level.
-
-![](./pics/time_noise.png)
-
+![](./pics/kmeansfastgreedykvar3.png)
+![](./pics/kmeansfastgreedykvar10.png)
+![](./pics/kmeansfastgreedykvar.png)
 ## References
 >KNN
 
