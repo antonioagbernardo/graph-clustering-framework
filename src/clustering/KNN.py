@@ -1,6 +1,9 @@
 #KNN
 
 #Código
+from sklearn.neighbors import kneighbors_graph
+from igraph import Graph
+
 def KNN(X,k,metric):
 
   if metric == 'euclidean':
