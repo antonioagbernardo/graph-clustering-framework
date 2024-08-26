@@ -6,6 +6,8 @@ setup(
     packages=find_packages(where="src"),
     package_dir={"": "src"},
     install_requires=[
+        'scikit-learn>=0.24.2',
+        'python-igraph>=0.9.1',
         'autorank',
         'cairocffi',
         'IPython',
