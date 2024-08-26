@@ -16,8 +16,6 @@ setup(
         'numpy',
         'pandas',
         'plotly==5.23.0',
-        'python-igraph',
-        'scikit-learn',
         'scipy',
         'seaborn',
         'svgutils',
