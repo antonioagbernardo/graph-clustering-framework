@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib.colors import ListedColormap
 import igraph
+from igraph import plot
 from mpl_toolkits.mplot3d import Axes3D
 
 def plot_grafico3(X, y, colors, G=None):
