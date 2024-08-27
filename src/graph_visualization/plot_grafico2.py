@@ -1,4 +1,8 @@
-#Function used to vizualize the data base (Poinst (X,y) in space -- pre graph clustering)
+#Function used to vizualize the data base (Poinst (X,y) in space)
+import matplotlib.pyplot as plt
+import numpy as np
+from matplotlib.colors import ListedColormap
+import igraph
 
 def plot_grafico2(X, y, colors, G=None):
     fig = plt.figure(figsize=(8, 6))
