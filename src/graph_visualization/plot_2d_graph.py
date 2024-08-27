@@ -1,4 +1,5 @@
 import igraph
+from igraph import plot
 import matplotlib.pyplot as plt
 from IPython.display import display, SVG
 def plot_2d_graph(g, y=None, X=None, ind=None, colors=None):
