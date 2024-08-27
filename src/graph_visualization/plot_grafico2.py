@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib.colors import ListedColormap
 import igraph
+from igraph import plot
 
 def plot_grafico2(X, y, colors, G=None):
     fig = plt.figure(figsize=(8, 6))
