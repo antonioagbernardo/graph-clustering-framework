@@ -12,6 +12,6 @@ def plot_grafico2(X, y, colors, G=None):
     if G is not None:
         for edge in G.es():
             i, j = edge.tuple[0], edge.tuple[1]
-            line = numpy.array([X[i], X[j]])
+            line = np.array([X[i], X[j]])
             ax.plot(line[:, 0], line[:, 1], color='black')
     plt.show()
