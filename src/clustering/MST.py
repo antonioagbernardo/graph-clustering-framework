@@ -31,7 +31,7 @@ def MST(X, metric):
 
     csr_matrix(adj)
 
-    W1 = mst_graph(X,'euclidian')
+    W1 = mst_graph(X,'euclidean')
 
     g2 = Graph.Weighted_Adjacency(W1.todense(), mode='undirected', attr='weight', loops=False)
 
