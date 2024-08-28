@@ -1,3 +1,8 @@
+from sklearn.metrics.pairwise import euclidean_distances
+#import igraph
+from igraph import Graph
+from scipy import spatial
+
 def sknn(X, kmax, mode='distance', metric='euclidean'):
     """Summary or Description of the Function
 
