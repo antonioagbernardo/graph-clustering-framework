@@ -1,4 +1,6 @@
 from MST import mst_graph
+from sklearn.neighbors import kneighbors_graph
+from igraph import Graph
 
 def components(W):
   g = Graph.Weighted_Adjacency(W.todense(), mode='undirected', attr='weight', loops=False)
