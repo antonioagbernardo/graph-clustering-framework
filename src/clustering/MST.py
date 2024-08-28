@@ -9,7 +9,7 @@ import igraph
 def mst_graph(X, metric):
 
     if metric == 'cosine':
-        D = cosine_distances(X, X)
+        D = 1 - cosine_similarity(X)
     else:
         D = euclidean_distances(X, X)
     adj_directed = minimum_spanning_tree(D).toarray()
