@@ -1,6 +1,5 @@
 import numpy as np
-#from scipy.spatial.distance import cosine_distances
-from sklearn.metrics.pairwise import cosine_similarity
+from scipy.spatial.distance import cosine_distances
 from scipy.spatial.distance import euclidean_distances
 from scipy.sparse.csgraph import minimum_spanning_tree
 from scipy.sparse import csr_matrix
@@ -9,7 +8,7 @@ import igraph
 def mst_graph(X, metric):
 
     if metric == 'cosine':
-        D = 1 - cosine_similarity(X)
+        D = cosine_distances(X, X)
     else:
         D = euclidean_distances(X, X)
     adj_directed = minimum_spanning_tree(D).toarray()
