@@ -16,7 +16,7 @@ setup(
         'numpy',
         'pandas',
         'plotly==5.23.0',
-        'scipy',
+        'scipy==1.6.0',
         'seaborn',
         'svgutils',
     ],
