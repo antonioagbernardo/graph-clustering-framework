@@ -1,4 +1,7 @@
 #B-matching
+from igraph import Graph
+from scipy.sparse import csr_matrix
+from sklearn.neighbors import kneighbors_graph
 
 def b_matching(X, k, b, metric='euclidean'):
 
