@@ -1,6 +1,5 @@
 # Graph Construction from Data using Non Negative Kernel regression (NNK Graphs)
 import numpy as np
-from scipy.linalg import cholesky_solver
 from scipy.sparse import coo_matrix
 import igraph
 
