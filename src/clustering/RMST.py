@@ -5,6 +5,7 @@ from sklearn.metrics.pairwise import euclidean_distances
 from scipy.sparse.csgraph import minimum_spanning_tree
 from scipy.sparse import csr_matrix
 import networkx as nx
+import itertools
 
 def rmst_graph(X, gamma, k):
 
