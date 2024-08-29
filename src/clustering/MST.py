@@ -2,7 +2,8 @@ import numpy as np
 from sklearn.metrics.pairwise import euclidean_distances, cosine_distances
 from scipy.sparse.csgraph import minimum_spanning_tree
 from scipy.sparse import csr_matrix
-import igraph
+from igraph import Graph
+
 
 def mst_graph(X, metric):
 
