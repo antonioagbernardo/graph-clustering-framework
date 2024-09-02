@@ -77,6 +77,60 @@ plot_grafico3(X, y, colors, g2)
 
 ![](./pics/3d_mknn_graph.png)
 
+## How to use the framework
+
+1.Clone the framework repository:
+   ~~~python
+   git clone https://github.com/Artur-Porto/graph-clustering-framework.git
+   ~~~
+2.Change to the framework's root directory:
+   ~~~python
+   cd graph-clustering-framework
+   ~~~
+3.Install the required dependencies:
+  ~~~python
+  pip install -r requirements.txt
+  ~~~
+4.Install the framework locally:
+   ~~~python
+   pip install .
+   ~~~
+5.Import the necessary clustering classes:
+  ~~~python
+  from clustering.KNN import KNN
+  from clustering.Epsilon import Epsilon
+  from clustering.SKNN import sknn
+  from clustering.MST import MST
+  from clustering.MKNN import MKNN
+  from clustering.CKNN import cknn_graph
+  from clustering.GBLP import GBLP
+  from clustering.RMST import rmst_graph
+  from clustering.B_matching import b_matching
+  ~~~
+6.Import the graph visualization functions:
+  ~~~python
+  from graph_visualization.plot_2d_graph import plot_2d_graph
+  from graph_visualization.plot_grafico2 import plot_grafico2
+  from graph_visualization.plot_grafico3 import plot_grafico3
+  ~~~
+7.Get some data(example)
+  ~~~python
+  import sklearn.datasets as dt
+
+  X, y = dt.make_blobs(n_samples=1000, n_features=3, centers=5, cluster_std=1.1, random_state=33)
+  ~~~
+8.Use the desired clustering method (e.g., MKNN):
+  ~~~python
+  g, W = MKNN(X, 5, 'euclidean')
+  ~~~
+9.Visualize the resulting graph:
+~~~python
+colors = ['red', 'green', 'orange', 'yellow', 'blue']
+plot_2d_graph(g, y=y, X=X, ind=range(0, g.vcount()), colors=colors)
+plot_grafico2(X, y, colors, g)
+plot_grafico3(X, y, colors, g)
+~~~
+
 ## Iris Dataset
 I also used Iris Dataset to make some graphs and clustering.
 ### Upload and Visualization
