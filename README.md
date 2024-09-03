@@ -95,7 +95,18 @@ plot_grafico3(X, y, colors, g2)
    ~~~python
    pip install .
    ~~~
-5.Import the necessary clustering classes:
+5.Add Framework Source Directory to Python Path
+  ~~~python
+  import sys
+  import os
+
+  repo_dir = '/content/graph-clustering-framework/src'
+  sys.path.insert(0, repo_dir)
+~~~
+
+This code adds the graph clustering framework's source directory to the Python path, allowing you to import and use the framework's classes and functions in your current Python session.
+
+6.Import the necessary clustering classes:
   ~~~python
   from clustering.KNN import KNN
   from clustering.Epsilon import Epsilon
@@ -107,23 +118,23 @@ plot_grafico3(X, y, colors, g2)
   from clustering.RMST import rmst_graph
   from clustering.B_matching import b_matching
   ~~~
-6.Import the graph visualization functions:
+7.Import the graph visualization functions:
   ~~~python
   from graph_visualization.plot_2d_graph import plot_2d_graph
   from graph_visualization.plot_grafico2 import plot_grafico2
   from graph_visualization.plot_grafico3 import plot_grafico3
   ~~~
-7.Get some data(example)
+8.Get some data(example)
   ~~~python
   import sklearn.datasets as dt
 
   X, y = dt.make_blobs(n_samples=1000, n_features=3, centers=5, cluster_std=1.1, random_state=33)
   ~~~
-8.Use the desired clustering method (e.g., MKNN):
+9.Use the desired clustering method (e.g., MKNN):
   ~~~python
   g, W = MKNN(X, 5, 'euclidean')
   ~~~
-9.Visualize the resulting graph:
+10.Visualize the resulting graph:
 ~~~python
 colors = ['red', 'green', 'orange', 'yellow', 'blue']
 plot_2d_graph(g, y=y, X=X, ind=range(0, g.vcount()), colors=colors)
