@@ -1,10 +1,10 @@
 from sklearn.neighbors import kneighbors_graph
-from sklearn.metrics.pairwise import euclidean_distances, cosine_distances
+#from sklearn.metrics.pairwise import euclidean_distances, cosine_distances
 from igraph import Graph
 import numpy as np
-from scipy.sparse.csgraph import minimum_spanning_tree
+#from scipy.sparse.csgraph import minimum_spanning_tree
 from scipy.sparse import csr_matrix
-
+'''
 def mst_graph(X, metric):
 
     if metric == 'cosine':
@@ -38,3 +38,20 @@ def MKNN(X,k,metric):
       W = W + mst_graph(X,'cosine')
     g2 = Graph.Weighted_Adjacency(W.todense(), mode='undirected', attr='weight', loops=False)
     return g2, W
+    '''
+
+def MKNN(X, k, metric):
+    # Gera a matriz de adjacência de k-vizinhos usando a métrica escolhida
+    W = kneighbors_graph(X, k, mode='connectivity', metric=metric, include_self=False)
+    
+    # Converte W para matriz binária simétrica de vizinhos mútuos
+    W_mutual = W.multiply(W.T)  # Mantém apenas as conexões mutuamente próximas
+    
+    # Verifica se o grafo está desconectado (possui mais de um componente)
+    #if components(W_mutual) > 1:
+        #W_mutual = W_mutual + mst_graph(X, metric)  # Conecta componentes com MST se necessário
+    
+    # Cria o grafo com pesos
+    g2 = Graph.Weighted_Adjacency(W_mutual.todense(), mode='undirected', attr='weight', loops=False)
+    
+    return g2, W_mutual
